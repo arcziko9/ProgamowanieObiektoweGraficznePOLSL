@@ -1,0 +1,4 @@
+Nowy,Piłkarz,25,85
+Memphis,Depayy,25,67.8
+Cistioano,Ronalod,23,93.1
+testowy,testowy,20,70.4

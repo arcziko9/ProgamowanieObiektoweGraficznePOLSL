@@ -33,10 +33,10 @@
 
                 <!--First Name-->
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Imię:" FontSize="30" Padding="10 5 10 10"/>
-                <TextBox Text="Podaj imie" x:Name="firstName_tbx" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Padding="2" Background="#eee" FontSize="17" Margin="10" ToolTip="Uzupełnij dane"   />
+                <TextBox x:Name="firstName_tbx" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Padding="2" Background="#eee" FontSize="17" Margin="10" ToolTip="Uzupełnij dane" PreviewMouseLeftButtonDown="MouseDown_firstName_tbx"  />
                 <!--Last Name-->
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Nazwisko:" FontSize="30" Padding="10 5 10 10"/>
-                <TextBox Text="Podaj nazwisko" x:Name="lastName_tbx" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="1" Padding="2" Background="#eee" FontSize="17" Margin="10" ToolTip="Uzupełnij dane" />
+                <TextBox x:Name="lastName_tbx" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="1" Padding="2" Background="#eee" FontSize="17" Margin="10" ToolTip="Uzupełnij dane" PreviewMouseLeftButtonDown="MouseDown_lastName_tbx" />
                 <!--Age-->
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Wiek:" FontSize="30" Padding="10 5 10 10"/>
                 <ComboBox x:Name="age_cb" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="2" Padding="10" Background="#eee" FontSize="15" Margin="10" SelectedIndex="0" />

@@ -35,5 +35,10 @@ namespace Piłkarze
         {
             return (firstName + ", " + lastName + ", " + age + "lat, " + weight + "kg");
         }
+
+        public string ToStringToFile()
+        {
+            return (firstName + "," + lastName + "," + age + "," + weight);
+        }
     }
 }
