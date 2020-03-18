@@ -1,4 +1,5 @@
-Nowy,Piłkarz,25,85
 Memphis,Depayy,25,67.8
-Cistioano,Ronalod,23,93.1
-testowy,testowy,20,70.4
+Cistioano,Ronalod,23,76.9
+Cistioano,Ronalod,34,93.1
+dsafsaf,fdasfa,15,50
+Nowy,Piłkarz,36,89.8

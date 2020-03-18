@@ -208,13 +208,20 @@ namespace Piłkarze
             {
                 case MessageBoxResult.Yes:
                     if(Check() && playersList_lb.SelectedItem != null)
-                    {
-                        playerList.Remove((Player)playersList_lb.SelectedItem);
+                    {                  
                         Player player = GetPlayerFromForms();
-                        playerList.Add(player);
-                        PrintPlayersToListBox();
-                        UpdateFile();
-                        ClearAllFields();
+                        if (!PlayerExist(player))
+                        {
+                            playerList.Remove((Player)playersList_lb.SelectedItem);
+                            playerList.Add(player);
+                            PrintPlayersToListBox();
+                            UpdateFile();
+                            ClearAllFields();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Piłkarz już istnieje");
+                        }
                     }
                     else if(playersList_lb.SelectedItem == null)
                     {
@@ -232,6 +239,8 @@ namespace Piłkarze
             Player player = (Player)playersList_lb.SelectedItem;
             try
             {
+                lastName_tbx.Foreground = Brushes.Black;
+                firstName_tbx.Foreground = Brushes.Black;
                 firstName_tbx.Text = player.firstName;
                 lastName_tbx.Text = player.lastName;
                 age_cb.SelectedItem = player.age;

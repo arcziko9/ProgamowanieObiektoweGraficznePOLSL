@@ -40,5 +40,27 @@ namespace Piłkarze
         {
             return (firstName + "," + lastName + "," + age + "," + weight);
         }
+
+        public bool Equals(Player p)
+        {
+            if (p == null)
+                return false;
+            if ((this.firstName == p.firstName) && (this.lastName == p.lastName) && (this.age == p.age) && (this.weight == p.weight))
+            {
+                return true;
+            }
+            return false;
+        }
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+                return false;
+
+            Player p = obj as Player;
+            if (p == null)
+                return false;
+            else
+                return Equals(p);
+        }
     }
 }
