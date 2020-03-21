@@ -92,11 +92,11 @@ namespace Calculator
         private void ChangeSignButton_Click(object sender, RoutedEventArgs e)
         {
             string text = Component.Text;
-            if (Component.Text.IndexOf("-") < 0)
+            if (Component.Text.IndexOf("-") < 0 && Component.Text != "0")
             {
                 Component.Text = Component.Text.Insert(0, "-");
             }
-            else
+            else if(Component.Text.IndexOf("-") >= 0)
             {
                 Component.Text = Component.Text.Remove(0, 1);
             }
