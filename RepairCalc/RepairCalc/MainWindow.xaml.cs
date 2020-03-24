@@ -23,6 +23,7 @@ namespace RepairCalc
     {
         public MainWindow()
         {
+            IFormatProvider FormatProvider = new System.Globalization.CultureInfo("");
             InitializeComponent();
         }
 
