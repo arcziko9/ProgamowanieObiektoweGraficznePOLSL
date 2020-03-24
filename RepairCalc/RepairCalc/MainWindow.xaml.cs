@@ -15,9 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Calculator
+namespace RepairCalc
 {
-
+    
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -36,7 +36,7 @@ namespace Calculator
         private void ButtonDigit_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            if (Component.Text != "0" && Component.Text != "out of range" && Component.Text != "Cannot divide by zero")
+            if(Component.Text != "0" && Component.Text != "Out of range" && Component.Text != "Cannot divide by zero")
             {
                 Component.Text += button.Content.ToString();
             }
@@ -44,15 +44,14 @@ namespace Calculator
             {
                 Component.Text = button.Content.ToString();
             }
-
         }
 
-        private void CeButton_Click(object sender, RoutedEventArgs e)
+        private void AcButton_Click(object sender, RoutedEventArgs e)
         {
             Component.Text = "0";
         }
 
-        private void CButton_Click(object sender, RoutedEventArgs e)
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             Component.Text = "0";
             Sentence.Text = "";
@@ -61,18 +60,16 @@ namespace Calculator
         private void SignButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            if (Component.Text != "0" && Sentence.Text == "0" && Component.Text != "out of range" && Component.Text != "Cannot divide by zero")
+            if(Component.Text != "0" && Component.Text != "Cannot divide by zero" && Component.Text != "Out of range")
             {
-                Sentence.Text = Component.Text + " " + button.Content.ToString();
+                RemoveDotFromComponent();
+                Sentence.Text += " " + Component.Text + " " + button.Content;
                 Component.Text = "0";
             }
-            else if (Component.Text != "0" && Sentence.Text != "0" && Component.Text != "out of range" && Component.Text != "Cannot divide by zero")
+            else
             {
-                Sentence.Text += " " + Component.Text + " " + button.Content.ToString();
                 Component.Text = "0";
             }
-
-
         }
 
         private void DotButton_Click(object sender, RoutedEventArgs e)
@@ -85,11 +82,11 @@ namespace Calculator
 
         private void ChangeSignButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Component.Text != "0" && !Component.Text.Contains("-"))
+            if(Component.Text != "0" && !Component.Text.Contains("-"))
             {
                 Component.Text = Component.Text.Insert(0, "-");
             }
-            else if (Component.Text.Contains("-"))
+            else if(Component.Text.Contains("-"))
             {
                 Component.Text = Component.Text.Remove(0, 1);
             }
@@ -97,7 +94,7 @@ namespace Calculator
 
         private void BackspaceButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Component.Text.Length == 1)
+            if(Component.Text.Length == 1)
             {
                 Component.Text = "0";
             }
@@ -140,13 +137,12 @@ namespace Calculator
             try
             {
                 double value = Math.Round(Convert.ToDouble(new DataTable().Compute(math, string.Empty)), 8);
-                return (value < -9999999999 || value > 9999999999) ? "out of range" : value.ToString();
+                return (value < -9999999999 || value > 9999999999) ? "Out of range" : value.ToString();
             }
             catch (DivideByZeroException)
             {
                 return "Cannot divide by zero";
             }
-
         }
     }
 }

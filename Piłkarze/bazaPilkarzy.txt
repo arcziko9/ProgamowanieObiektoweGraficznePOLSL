@@ -3,3 +3,4 @@ Cistioano,Ronalod,23,76.9
 Cistioano,Ronalod,34,93.1
 dsafsaf,fdasfa,15,50
 Nowy,Piłkarz,36,89.8
+Nowy,Piłkarz,36,62.8

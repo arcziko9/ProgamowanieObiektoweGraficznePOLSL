@@ -26,7 +26,6 @@ namespace Piłkarze
         {
             InitializeComponent();
             FirstLoad();
-            AddValuesToAge();
 
         }
 
@@ -99,6 +98,7 @@ namespace Piłkarze
             lastName_tbx.Foreground = Brushes.Gray;
             lastName_tbx.Text = "Podaj nazwisko";
             LoadPlayersFromFile();
+            AddValuesToAge();
         }
 
         private Boolean Check()
