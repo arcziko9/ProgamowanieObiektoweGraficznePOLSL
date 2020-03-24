@@ -5,12 +5,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -23,8 +25,12 @@ namespace RepairCalc
     {
         public MainWindow()
         {
-            IFormatProvider FormatProvider = new System.Globalization.CultureInfo("");
             InitializeComponent();
+            var currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+            var ci = new CultureInfo(currentCulture) { NumberFormat = { NumberDecimalSeparator = "." } };
+            System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
 
         private void RemoveDotFromComponent()
@@ -80,7 +86,7 @@ namespace RepairCalc
         {
             if (!Component.Text.Contains("."))
             {
-                Component.Text += ".";
+                Component.Text += ".".ToString();
             }
         }
 
@@ -141,7 +147,7 @@ namespace RepairCalc
             try
             {
                 double value = Math.Round(Convert.ToDouble(new DataTable().Compute(math, string.Empty)), 8);
-                return (value < -9999999999 || value > 9999999999) ? "Out of range" : value.ToString(CultureInfo.CreateSpecificCulture("en-GB"));
+                return (value < -9999999999 || value > 9999999999) ? "Out of range" : value.ToString();
             }
             catch (DivideByZeroException)
             {
