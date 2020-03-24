@@ -23,7 +23,6 @@ namespace RepairCalc
     {
         public MainWindow()
         {
-            CultureInfo.CreateSpecificCulture("en-GB");
             InitializeComponent();
         }
 
@@ -37,9 +36,11 @@ namespace RepairCalc
 
         private void ButtonDigit_Click(object sender, RoutedEventArgs e)
         {
+            string output;
             var button = (Button)sender;
             if(Component.Text != "0" && Component.Text != "Out of range" && Component.Text != "Cannot divide by zero")
             {
+
                 Component.Text += button.Content.ToString();
             }
             else
@@ -139,7 +140,7 @@ namespace RepairCalc
             try
             {
                 double value = Math.Round(Convert.ToDouble(new DataTable().Compute(math, string.Empty)), 8);
-                return (value < -9999999999 || value > 9999999999) ? "Out of range" : value.ToString();
+                return (value < -9999999999 || value > 9999999999) ? "Out of range" : value.ToString(CultureInfo.CreateSpecificCulture("en-GB"));
             }
             catch (DivideByZeroException)
             {
