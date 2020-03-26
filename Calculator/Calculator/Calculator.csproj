@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54CFD35C-6BA1-4005-B1C5-ACA41F47F48D}</ProjectGuid>
+    <ProjectGuid>{FA6F6124-EF80-4D1F-9AB1-71635089726D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>RepairCalc</RootNamespace>
-    <AssemblyName>RepairCalc</AssemblyName>
+    <RootNamespace>Calculator</RootNamespace>
+    <AssemblyName>Calculator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

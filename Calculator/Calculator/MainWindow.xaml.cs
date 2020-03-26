@@ -18,9 +18,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RepairCalc
+namespace Calculator
 {
-    
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -43,9 +43,8 @@ namespace RepairCalc
 
         private void ButtonDigit_Click(object sender, RoutedEventArgs e)
         {
-            string output;
             var button = (Button)sender;
-            if(Component.Text != "0" && Component.Text != "Out of range" && Component.Text != "Cannot divide by zero")
+            if (Component.Text != "0" && Component.Text != "Out of range" && Component.Text != "Cannot divide by zero")
             {
 
                 Component.Text += button.Content.ToString();
@@ -70,7 +69,7 @@ namespace RepairCalc
         private void SignButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            if(Component.Text != "0" && Component.Text != "Cannot divide by zero" && Component.Text != "Out of range")
+            if (Component.Text != "0" && Component.Text != "Cannot divide by zero" && Component.Text != "Out of range")
             {
                 RemoveDotFromComponent();
                 Sentence.Text += " " + Component.Text + " " + button.Content;
@@ -92,11 +91,11 @@ namespace RepairCalc
 
         private void ChangeSignButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Component.Text != "0" && !Component.Text.Contains("-"))
+            if (Component.Text != "0" && !Component.Text.Contains("-"))
             {
                 Component.Text = Component.Text.Insert(0, "-");
             }
-            else if(Component.Text.Contains("-"))
+            else if (Component.Text.Contains("-"))
             {
                 Component.Text = Component.Text.Remove(0, 1);
             }
@@ -104,7 +103,7 @@ namespace RepairCalc
 
         private void BackspaceButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Component.Text.Length == 1)
+            if (Component.Text.Length == 1)
             {
                 Component.Text = "0";
             }
