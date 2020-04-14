@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PiłkarzeMVVM.Model
+﻿namespace PiłkarzeMVVM.Model
 {
     public class Player
     {

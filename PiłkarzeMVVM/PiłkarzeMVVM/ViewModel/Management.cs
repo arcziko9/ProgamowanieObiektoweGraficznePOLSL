@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PiłkarzeMVVM.Model;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ namespace PiłkarzeMVVM.ViewModel
 {
     class Management : ViewModelBase
     {
-        private string dataPath = @"C:\Users\Arkadiusz\source\repos\PiłkarzeMVVM\PiłkarzeMVVM\json2.json";
+        private string dataPath = @"Database.json";
         private string firstName = null;
         private string lastName = null;
         private int? age = 16;
@@ -132,8 +133,15 @@ namespace PiłkarzeMVVM.ViewModel
                 {
                     loadData = new RelayCommand(execute =>
                     {
-                        var jsonPlayers = File.ReadAllText(dataPath);
-                        Players = JsonConvert.DeserializeObject<BindingList<Player>>(jsonPlayers);
+                        try
+                        {
+                            var jsonPlayers = File.ReadAllText(dataPath);
+                            Players = JsonConvert.DeserializeObject<BindingList<Player>>(jsonPlayers);
+                        }
+                        catch(Exception e)
+                        {
+                            System.Console.WriteLine(e);
+                        }
                         onPropertyChanged(nameof(LoadData));
                         Players.ResetBindings();
                     }, canExecute => File.Exists(dataPath) && (new FileInfo(dataPath).Length > 0));
@@ -149,8 +157,15 @@ namespace PiłkarzeMVVM.ViewModel
                 {
                     saveData = new RelayCommand(execute =>
                     {
-                        var jsonPlayers = JsonConvert.SerializeObject(Players);
-                        File.WriteAllText(dataPath, jsonPlayers);
+                        try
+                        {
+                            var jsonPlayers = JsonConvert.SerializeObject(Players);
+                            File.WriteAllText(dataPath, jsonPlayers);
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
                         onPropertyChanged(nameof(SaveData));
                     }, canExecute => true);
                 }
