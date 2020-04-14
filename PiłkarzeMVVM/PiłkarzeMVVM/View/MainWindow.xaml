@@ -1,0 +1,86 @@
+﻿<Window x:Class="PiłkarzeMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:PiłkarzeMVVM.View"
+        xmlns:vm="clr-namespace:PiłkarzeMVVM.ViewModel"
+        Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <vm:Management x:Key="management"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <StaticResource ResourceKey="management" />
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=LoadData, Source={StaticResource management}}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=LoadAgeItems, Source={StaticResource management}}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="LostFocus">
+            <i:InvokeCommandAction Command="{Binding Path=SaveData,Source={StaticResource management}}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Border Margin="0,3,0,-3" DataContext="{StaticResource management}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.6*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.15*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.15*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.6*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--First Name-->
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Imię:" FontSize="30" Padding="10 5 10 10"/>
+                <local:TextBoxForLetters  x:Name="firstName_tbx" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0" Padding="2" Background="#eee" FontSize="17" Margin="10" ToolTip="Uzupełnij dane" Text="{Binding Path=FirstName, Mode=TwoWay}"/>
+                <!--Last Name-->
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Nazwisko:" FontSize="30" Padding="10 5 10 10"/>
+                <local:TextBoxForLetters  x:Name="lastName_tbx" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="1" Padding="2" Background="#eee" FontSize="17" Margin="10" ToolTip="Uzupełnij dane" Text="{Binding Path=LastName, Mode=TwoWay}"/>
+                <!--Age-->
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Wiek:" FontSize="30" Padding="10 5 10 10"/>
+                <ComboBox x:Name="age_cb" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="2" Padding="10" Background="#eee" FontSize="15" Margin="10" ItemsSource="{Binding Path=AgeItems}" SelectedItem="{Binding Path=Age}"/>
+                <!--Weight-->
+                <Label Grid.Column="0" Grid.Row="3" Content="Waga:" FontSize="30" Padding="10 5 10 10"/>
+                <DockPanel VerticalAlignment="Center" Margin="2" Grid.Column="1" Grid.Row="3">
+                    <Label Content="{Binding ElementName=weight_slider, Path=Value}" DockPanel.Dock="Right" Width="40" FontSize="15"/>
+                    <Slider Width="102" Minimum="50" Maximum="99"  TickFrequency="0.1" IsSnapToTickEnabled="True" Name="weight_slider" Value="{Binding Path=Weight, Mode=TwoWay}"/>
+                </DockPanel>
+                <!--Buttons-->
+                <Button x:Name="add_btn" Grid.Row="5" Content="Dodaj" Margin="10 10 10 10" Grid.ColumnSpan="2" FontSize="20" Command="{Binding AddPlayer}"/>
+                <Button x:Name="delete_btn" Grid.Row="6" Content="Usuń" Margin="10 10 10 10" Grid.ColumnSpan="2" FontSize="20" Command="{Binding DeletePlayer}"/>
+                <Button x:Name="modify_btn" Grid.Row="7" Content="Modyfikuj" Margin="10 10 10 10" Grid.ColumnSpan="2" FontSize="20" Command="{Binding ModifyPlayer}"/>
+
+            </Grid>
+            <!--List of Players-->
+            <ListBox Grid.Column="1" x:Name="playersList_lb" FontSize="15" ItemsSource="{Binding Path=Players , UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedPlayer, Mode=TwoWay }">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Path=Copy}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
+        </Grid>
+
+    </Border>
+</Window>
