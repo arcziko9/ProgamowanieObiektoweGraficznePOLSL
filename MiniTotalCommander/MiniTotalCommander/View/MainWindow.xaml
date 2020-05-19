@@ -1,0 +1,99 @@
+﻿<Window x:Class="MiniTotalCommander.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MiniTotalCommander" 
+        xmlns:view="clr-namespace:MiniTotalCommander.View" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:MiniTotalCommander.ViewModel"
+        xmlns:resx="clr-namespace:MiniTotalCommander.Properties"
+        mc:Ignorable="d"
+        Title="MiniTotalCommander" Height="600" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <view:PanelTC x:Name="leftPanel" DataContext="{Binding Path=LeftPanel}"
+DriveLabel="{Binding Path=DriveLabel}"
+                      PathLabel="{Binding Path=PathLabel}"
+                      Drives="{Binding Path=Drives}"
+                      Path="{Binding Path=Path,Mode=TwoWay}"
+                      SelectedDrive="{Binding Path=SelectedDrive,Mode=TwoWay}"
+                      Contents="{Binding Path=Contents}"
+                      SelectedFile="{Binding Path=SelectedItem,Mode=TwoWay}"
+                      Grid.Column="0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PathEnter" SourceObject="{Binding ElementName=leftPanel}">
+                        <i:CallMethodAction MethodName="PathEnterPress"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="SelectedDriveChanged" SourceObject="{Binding ElementName=leftPanel}">
+                        <i:CallMethodAction MethodName="DriveChanged"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="FileEnter" SourceObject="{Binding ElementName=leftPanel}">
+                        <i:CallMethodAction MethodName="FileEnter"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="GotFocus" SourceObject="{Binding ElementName=leftPanel}">
+                        <i:CallMethodAction MethodName="switchActivePanel"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </view:PanelTC>
+
+            <view:PanelTC x:Name="rightPanel" DataContext="{Binding Path=RightPanel}"
+                      DriveLabel="{Binding Path=DriveLabel}"
+                      PathLabel="{Binding Path=PathLabel}"
+                      Drives="{Binding Path=Drives}"
+                      Path="{Binding Path=Path,Mode=TwoWay}"
+                      SelectedDrive="{Binding Path=SelectedDrive,Mode=TwoWay}"
+                      Contents="{Binding Path=Contents}"
+                      SelectedFile="{Binding Path=SelectedItem,Mode=TwoWay}"
+                      Grid.Column="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PathEnter"  SourceObject="{Binding ElementName=rightPanel}">
+                        <i:CallMethodAction MethodName="PathEnterPress"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="SelectedDriveChanged" SourceObject="{Binding ElementName=rightPanel}">
+                        <i:CallMethodAction MethodName="DriveChanged"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="FileEnter" SourceObject="{Binding ElementName=rightPanel}">
+                        <i:CallMethodAction MethodName="FileEnter"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="GotFocus" SourceObject="{Binding ElementName=rightPanel}">
+                        <i:CallMethodAction MethodName="switchActivePanel"
+                    TargetObject="{Binding RelativeSource={RelativeSource AncestorType={x:Type view:PanelTC}},
+                        Path=DataContext}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </view:PanelTC>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Copy" Command="{Binding Path=Copy}" Height="30" FontSize="15" Width="150" BorderThickness="2" BorderBrush="Black" Foreground="Black" Background="LightGreen" />
+        </StackPanel>
+    </Grid>
+</Window>
